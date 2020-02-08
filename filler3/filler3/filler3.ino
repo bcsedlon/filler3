@@ -1,9 +1,9 @@
 #include "Arduino.h"
 
-#define OUT_FILL1_PIN 3
-#define OUT_FILL2_PIN 4
-#define OUT_FILL3_PIN 5
-#define OUT_DONE_PIN  6
+#define OUT_FILL1_PIN 6
+#define OUT_FILL2_PIN 5
+#define OUT_FILL3_PIN 4
+#define OUT_DONE_PIN  3
 
 #define IN_START_PIN  8
 #define IN_UP_PIN     7
@@ -216,7 +216,7 @@ void lcdPrintWeights() {
 	if(state == STATE_FILL3)
 		lcd.print(F("              FILL3:"));
 	if(state == STATE_DONE)
-		lcd.print(F(">DONE:REMOVE       <"));
+		lcd.print(F(">DONE:REMOVE BARREL "));
 }
 
 void printProgram(Stream &port, Program &p, int n = -1) {
@@ -322,7 +322,7 @@ void loop() {
 						printProgram(Serial, program, n);
 						if(printConfirm(F("SAVE"))) {
 							EEPROM.put(sizeof(Program) * n, program);
-							printProgram(Serial, program, n);
+							//printProgram(Serial, program, n);
 						}
 					//}
 					s = "";
