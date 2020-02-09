@@ -21,10 +21,11 @@ const byte LCD_ROWS = 4; //2;
 const byte LCD_COLS = 20; //16;
 LiquidCrystal_I2C lcd(LCD_I2CADDR, 2, 1, 0, 4, 5, 6, 7, 3, POSITIVE);
 
-struct Program {
-	long params[3];
-	char name[12];
-};
+//struct Program {
+//	long params[3];
+//	char name[12];
+//}
+#include "StructProgram.h"
 #define PROGRAMS_NUM	42
 Program program;
 
@@ -417,9 +418,10 @@ void loop() {
 					buttonMillis = millis();
 					noButton = false;
 				}
-				if(updatePos < 3)
+				if(updatePos < 3) {
 					program.params[updatePos]--;
 					program.name[updatePos - 3] = min(program.name[updatePos - 3], '~');
+				}
 				if(updatePos >= 3) {
 					program.name[updatePos - 3]--;
 					program.name[updatePos - 3] = max(program.name[updatePos - 3], ' ');
